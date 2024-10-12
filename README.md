@@ -334,5 +334,5 @@ Après avoir créé mon Dockerfile, je peux déployer mon application avec eb cr
 
 1. Cloner le projet
    ```bash
-   git clone <url-du-repository>
-   cd flask_api_project
+   git clone https://github.com/MARAMATA/flaskProject1.git/
+
