@@ -1,0 +1,361 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Flask",
+    "description": "API RESTful pour gérer les utilisateurs et les items",
+    "version": "1.0.0"
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "AdminToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": [],
+      "AdminToken": []
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Connexion pour obtenir un token utilisateur",
+        "description": "Génère un token pour un utilisateur normal",
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "description": "Les identifiants de l'utilisateur",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": { "type": "string" },
+                "password": { "type": "string" }
+              },
+              "required": ["email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token généré avec succès",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": { "type": "string" }
+              }
+            }
+          },
+          "401": {
+            "description": "Identifiants invalides"
+          }
+        }
+      }
+    },
+    "/auth/admin/login": {
+      "post": {
+        "summary": "Connexion pour obtenir un token administrateur",
+        "description": "Génère un token pour un administrateur",
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "description": "Les identifiants de l'administrateur",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": { "type": "string" },
+                "password": { "type": "string" }
+              },
+              "required": ["email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token d'administrateur généré avec succès",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "admin_token": { "type": "string" }
+              }
+            }
+          },
+          "401": {
+            "description": "Identifiants invalides"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Récupère tous les utilisateurs",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des utilisateurs",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/User" }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crée un nouvel utilisateur",
+        "security": [
+          {
+            "AdminToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Les données de l'utilisateur à créer",
+            "schema": { "$ref": "#/definitions/User" }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Utilisateur créé avec succès"
+          },
+          "400": {
+            "description": "Erreur de validation des données"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "summary": "Récupère un utilisateur par son ID",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilisateur trouvé",
+            "schema": { "$ref": "#/definitions/User" }
+          },
+          "404": {
+            "description": "Utilisateur non trouvé"
+          }
+        }
+      },
+      "put": {
+        "summary": "Met à jour un utilisateur par son ID",
+        "security": [
+          {
+            "AdminToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Les nouvelles données de l'utilisateur",
+            "schema": { "$ref": "#/definitions/User" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilisateur mis à jour avec succès"
+          },
+          "400": {
+            "description": "Erreur de validation des données"
+          },
+          "404": {
+            "description": "Utilisateur non trouvé"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Supprime un utilisateur par son ID",
+        "security": [
+          {
+            "AdminToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilisateur supprimé avec succès"
+          },
+          "404": {
+            "description": "Utilisateur non trouvé"
+          }
+        }
+      }
+    },
+    "/items": {
+      "get": {
+        "summary": "Récupère tous les items",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des items",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Item" }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crée un nouvel item",
+        "security": [
+          {
+            "AdminToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "description": "Les données de l'item à créer",
+            "schema": { "$ref": "#/definitions/Item" }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Item créé avec succès"
+          },
+          "400": {
+            "description": "Erreur de validation des données"
+          }
+        }
+      }
+    },
+    "/items/{item_id}": {
+      "get": {
+        "summary": "Récupère un item par son ID",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item trouvé",
+            "schema": { "$ref": "#/definitions/Item" }
+          },
+          "404": {
+            "description": "Item non trouvé"
+          }
+        }
+      },
+      "put": {
+        "summary": "Met à jour un item par son ID",
+        "security": [
+          {
+            "AdminToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "item",
+            "in": "body",
+            "description": "Les nouvelles données de l'item",
+            "schema": { "$ref": "#/definitions/Item" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item mis à jour avec succès"
+          },
+          "400": {
+            "description": "Erreur de validation des données"
+          },
+          "404": {
+            "description": "Item non trouvé"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Supprime un item par son ID",
+        "security": [
+          {
+            "AdminToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item supprimé avec succès"
+          },
+          "404": {
+            "description": "Item non trouvé"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "role": { "type": "string" }
+      },
+      "required": ["username", "email", "password", "role"]
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "user_id": { "type": "integer" }
+      }
+    }
+  }
+}
