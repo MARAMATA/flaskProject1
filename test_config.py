@@ -1,4 +1,4 @@
-import os
+"""import os
 from dotenv import load_dotenv
 
 # Charger les variables d'environnement depuis le fichier .env
@@ -12,6 +12,6 @@ class TestConfig:
                                         'postgresql://default_user:default_pass@localhost:5432/API_FLASK_TEST')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    TESTING = True  # Active le mode test pour Flask
+    TESTING = True  # Active le mode test pour Flask"""
 
 
