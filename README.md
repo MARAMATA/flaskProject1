@@ -242,92 +242,70 @@ pytest test_app.py
 
 2. Déploiement de l’API :
 
-Voici un guide étape par étape pour créer un environnement Elastic Beanstalk et déployer mon application Flask en utilisant la ligne de commande (CLI) :
+Pour déployer mon application Flask sur Vercel, voici les étapes résumées :
 
-Étape 1 : Installer les Outils nécessaires
-Je dois m'assurer d'avoir les outils suivants installés sur ma machine :
+Préparation du projet :
 
-AWS CLI : Pour l'installer, je peux suivre les instructions officielles disponibles sur le site d'AWS.
-EB CLI (Elastic Beanstalk Command Line Interface) : Je peux l'installer avec la commande suivante :
+Je m'assure que mon projet a la bonne structure, avec un fichier app.py comme point d'entrée et un fichier requirements.txt contenant les dépendances nécessaires.
+Je crée un fichier vercel.json pour configurer le déploiement sur Vercel.
+Installation de Vercel CLI :
 
-pip install awsebcli
+J'installe Vercel CLI avec la commande suivante :
 
-Étape 2 : Configurer AWS CLI
-Avant de créer un environnement Elastic Beanstalk, je dois configurer AWS CLI avec mes informations d'identification :
+npm install -g vercel
 
+Je me connecte à mon compte Vercel en exécutant :
 
-aws configure
+vercel login
 
-Je serai invité à entrer :
+Configuration des variables d'environnement :
 
-Ma clé d'accès AWS
-Ma clé secrète AWS
-Ma région par défaut (par exemple, us-west-2)
-Mon format de sortie par défaut (je peux laisser cela vide)
+J'ajoute mes variables d'environnement, comme DATABASE_URL et SECRET_KEY, via le tableau de bord Vercel ou en utilisant la commande suivante :
 
-Étape 3 : Initialiser mon Application
+vercel env add
 
-Je me rends dans le répertoire de mon projet Flask et j'exécute la commande suivante pour initialiser mon application Elastic Beanstalk :
+Déploiement de l'application :
 
-eb init -p python-3.x nom_de_mon_application
-Je remplace nom_de_mon_application par le nom que je souhaite pour mon application. Il est important de choisir la version Python appropriée (ici, python-3.12).
+Je déploie mon projet en exécutant :
 
-Étape 4 : Créer un Environnement Elastic Beanstalk
-Une fois mon application initialisée, je peux créer un nouvel environnement avec la commande suivante :
+vercel
 
-eb create nom_de_mon_environnement
+Je suis les instructions pour choisir le projet et confirmer le chemin d'entrée (souvent app.py).
+Vérification et ajustements :
 
-Je remplace nom_de_mon_environnement par un nom pour l'environnement (par exemple, production ou dev). Cela créera un environnement Elastic Beanstalk et déploiera mon application.
+Je teste l'application à l'URL fournie par Vercel.
 
-Étape 5 : Déployer mon Application
-Si j'ai effectué des modifications dans mon code et que je souhaite déployer à nouveau mon application, j'utilise cette commande :
+En cas de problème, je peux vérifier les logs avec la commande :
 
-eb deploy
+vercel logs
 
-Étape 6 : Vérifier l'État de l'Environnement
-Je peux vérifier l'état de mon environnement en exécutant cette commande :
-
-eb status
-
-Étape 7 : Accéder à mon Application
-Une fois le déploiement terminé, je peux accéder à mon application via l'URL fournie par Elastic Beanstalk. Je peux aussi ouvrir l'application dans mon navigateur avec la commande suivante :
-
-eb open
-
-Étape 8 : Configurer les Variables d'Environnement
-Pour configurer les variables d'environnement nécessaires à mon application, j'utilise la commande suivante :
-
-
-eb setenv SECRET_KEY=ma_secret_key DATABASE_URL=mon_database_url
-
-Je remplace ma_secret_key et mon_database_url par les valeurs appropriées.
+En suivant ces étapes, je peux déployer efficacement mon application Flask sur Vercel.
 
 Étape 9 : Conteneuriser mon Application avec Docker 
 Si je souhaite utiliser Docker pour conteneuriser mon application Flask avant de la déployer, je dois ajouter un fichier Dockerfile à la racine de mon projet. Voici un exemple de Dockerfile :
 
-# Utiliser l'image Python comme base
+### Utiliser l'image Python comme base
 FROM python:3.12
 
-# Définir le répertoire de travail
+### Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers nécessaires
+### Copier les fichiers nécessaires
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY . .
 
-# Exposer le port 5000
+### Exposer le port 5000
 EXPOSE 5000
 
-# Lancer l'application
+###  Lancer l'application
 CMD ["flask", "run", "--host=0.0.0.0"]
+
 Ensuite, lors de l'initialisation de l'application, je spécifie que j'utilise Docker avec cette commande :
 
 eb init -p docker nom_de_mon_application
 
 Après avoir créé mon Dockerfile, je peux déployer mon application avec eb create ou eb deploy comme précédemment décrit.
-
-
 
 
 ## Installation et configuration
