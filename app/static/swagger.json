@@ -421,16 +421,12 @@
         },
         "password": {
           "type": "string"
-        },
-        "role": {
-          "type": "string"
         }
       },
       "required": [
         "username",
         "email",
-        "password",
-        "role"
+        "password"
       ]
     },
     "Item": {
