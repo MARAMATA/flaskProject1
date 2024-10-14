@@ -26,6 +26,9 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 def create_app():
     app = Flask(__name__, static_folder='static', static_url_path='/static')
 
+    # Activer le mode débogage
+    app.config['DEBUG'] = True
+
     # Activer CORS pour toute l'application
     CORS(app)
 
