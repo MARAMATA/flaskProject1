@@ -24,6 +24,7 @@ def home():
 # Route GET pour récupérer tous les utilisateurs
 @api_bp.route('/users', methods=['GET'])
 @token_required
+@role_required('admin')
 def get_users():
     users = User.query.all()
     if not users:
@@ -194,6 +195,7 @@ def create_item():
 # Route GET pour récupérer tous les items
 @api_bp.route('/items', methods=['GET'])
 @token_required
+@role_required('admin')
 def get_items():
     items = Item.query.all()
     if not items:
@@ -232,6 +234,7 @@ def update_item(item_id):
 # Route DELETE pour supprimer un item
 @api_bp.route('/items/<int:item_id>', methods=['DELETE'])
 @token_required
+@role_required('admin')
 def delete_item(item_id):
     item = Item.query.get_or_404(item_id)
     db.session.delete(item)
