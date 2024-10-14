@@ -115,10 +115,10 @@
     },
     "/users": {
       "get": {
-        "summary": "Récupère tous les utilisateurs",
+        "summary": "Récupère tous les utilisateurs (ADMIN uniquement)",
         "security": [
           {
-            "Bearer": []
+            "AdminToken": []
           }
         ],
         "responses": {
@@ -130,16 +130,14 @@
                 "$ref": "#/definitions/User"
               }
             }
+          },
+          "403": {
+            "description": "Accès interdit, ADMIN requis"
           }
         }
       },
       "post": {
         "summary": "Crée un nouvel utilisateur",
-        "security": [
-          {
-            "AdminToken": []
-          }
-        ],
         "parameters": [
           {
             "name": "user",
@@ -162,7 +160,7 @@
     },
     "/users/{user_id}": {
       "get": {
-        "summary": "Récupère un utilisateur par son ID",
+        "summary": "Récupère un utilisateur par son ID (ADMIN ou lui-même)",
         "security": [
           {
             "Bearer": []
@@ -184,16 +182,19 @@
               "$ref": "#/definitions/User"
             }
           },
+          "403": {
+            "description": "Accès interdit"
+          },
           "404": {
             "description": "Utilisateur non trouvé"
           }
         }
       },
       "put": {
-        "summary": "Met à jour un utilisateur par son ID",
+        "summary": "Met à jour un utilisateur par son ID (ADMIN ou lui-même)",
         "security": [
           {
-            "AdminToken": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -217,6 +218,9 @@
           "200": {
             "description": "Utilisateur mis à jour avec succès"
           },
+          "403": {
+            "description": "Accès interdit"
+          },
           "400": {
             "description": "Erreur de validation des données"
           },
@@ -226,7 +230,7 @@
         }
       },
       "delete": {
-        "summary": "Supprime un utilisateur par son ID",
+        "summary": "Supprime un utilisateur par son ID (ADMIN uniquement)",
         "security": [
           {
             "AdminToken": []
@@ -245,6 +249,9 @@
           "200": {
             "description": "Utilisateur supprimé avec succès"
           },
+          "403": {
+            "description": "Accès interdit, ADMIN requis"
+          },
           "404": {
             "description": "Utilisateur non trouvé"
           }
@@ -253,10 +260,10 @@
     },
     "/items": {
       "get": {
-        "summary": "Récupère tous les items",
+        "summary": "Récupère tous les items (ADMIN uniquement)",
         "security": [
           {
-            "Bearer": []
+            "AdminToken": []
           }
         ],
         "responses": {
@@ -268,14 +275,17 @@
                 "$ref": "#/definitions/Item"
               }
             }
+          },
+          "403": {
+            "description": "Accès interdit, ADMIN requis"
           }
         }
       },
       "post": {
-        "summary": "Crée un nouvel item",
+        "summary": "Crée un nouvel item (Utilisateur connecté)",
         "security": [
           {
-            "AdminToken": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -300,7 +310,7 @@
     },
     "/items/{item_id}": {
       "get": {
-        "summary": "Récupère un item par son ID",
+        "summary": "Récupère un item par son ID (Propriétaire ou ADMIN)",
         "security": [
           {
             "Bearer": []
@@ -322,16 +332,19 @@
               "$ref": "#/definitions/Item"
             }
           },
+          "403": {
+            "description": "Accès interdit"
+          },
           "404": {
             "description": "Item non trouvé"
           }
         }
       },
       "put": {
-        "summary": "Met à jour un item par son ID",
+        "summary": "Met à jour un item par son ID (Propriétaire ou ADMIN)",
         "security": [
           {
-            "AdminToken": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -355,6 +368,9 @@
           "200": {
             "description": "Item mis à jour avec succès"
           },
+          "403": {
+            "description": "Accès interdit"
+          },
           "400": {
             "description": "Erreur de validation des données"
           },
@@ -364,10 +380,10 @@
         }
       },
       "delete": {
-        "summary": "Supprime un item par son ID",
+        "summary": "Supprime un item par son ID (Propriétaire ou ADMIN)",
         "security": [
           {
-            "AdminToken": []
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -382,6 +398,9 @@
         "responses": {
           "200": {
             "description": "Item supprimé avec succès"
+          },
+          "403": {
+            "description": "Accès interdit"
           },
           "404": {
             "description": "Item non trouvé"
@@ -402,16 +421,12 @@
         },
         "password": {
           "type": "string"
-        },
-        "role": {
-          "type": "string"
         }
       },
       "required": [
         "username",
         "email",
         "password",
-        "role"
       ]
     },
     "Item": {
