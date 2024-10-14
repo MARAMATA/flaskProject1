@@ -7,8 +7,8 @@
     <style>
       body {
         font-family: "Arial", sans-serif;
-        background-color: #f0f8ff; /* Couleur de fond douce */
-        color: #333; /* Couleur du texte principale */
+        background-color: #1e1f26; /* Fond sombre dynamique */
+        color: #f7f7f7; /* Couleur du texte */
         text-align: center;
         margin: 0;
         padding: 20px;
@@ -19,45 +19,64 @@
       }
 
       .container {
-        background-color: #ffffff;
+        background-color: #292b37; /* Couleur plus claire pour le conteneur */
         padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Ombre plus intense */
         max-width: 600px;
         width: 100%;
+        animation: fadeIn 1s ease-in-out; /* Animation d'apparition */
       }
 
       h1 {
-        color: #0056b3; /* Couleur du titre */
+        color: #f39c12; /* Couleur vive pour le titre */
         margin-bottom: 20px;
+        font-size: 2.4em;
       }
 
       p {
-        font-size: 1.1em;
-        color: #555; /* Couleur secondaire */
-        line-height: 1.6;
+        font-size: 1.2em;
+        color: #bdc3c7; /* Couleur plus douce pour le texte */
+        line-height: 1.8;
       }
 
       a {
         display: inline-block;
         text-decoration: none;
         color: #fff;
-        background-color: #28a745; /* Couleur du bouton */
+        background-color: #e74c3c; /* Couleur bouton dynamique */
         padding: 15px 30px;
-        border-radius: 5px;
+        border-radius: 8px;
         font-size: 1.2em;
         transition: background-color 0.3s ease;
         margin-top: 20px;
       }
 
       a:hover {
-        background-color: #218838; /* Changement de couleur au survol */
+        background-color: #c0392b; /* Effet survol bouton */
       }
 
       footer {
         margin-top: 40px;
         font-size: 0.9em;
-        color: #888;
+        color: #95a5a6; /* Couleur plus douce pour le footer */
+      }
+
+      footer span {
+        font-weight: bold;
+        color: #ecf0f1; /* Couleur du texte du copyright */
+      }
+
+      /* Animation douce à l'apparition */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     </style>
   </head>
@@ -69,7 +88,9 @@
         fonctionnalités de notre API.
       </p>
       <a href="/swagger" target="_blank">Voir la documentation Swagger</a>
-      <footer>Développé par Ibrahima Ndao</footer>
+      <footer>
+        <p>&copy; <span>2024 Maramata DIOP</span> - Tous droits réservés</p>
+      </footer>
     </div>
   </body>
 </html>
