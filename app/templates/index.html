@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bienvenue dans l'API Flask</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff; /* Couleur de fond */
-            color: #333; /* Couleur du texte */
-            text-align: center; /* Centrer le texte */
-            padding: 20px; /* Espacement intérieur */
-        }
-        h1 {
-            color: #0056b3; /* Couleur du titre */
-        }
-        p {
-            font-size: 1.2em; /* Taille du texte */
-        }
-        a {
-            text-decoration: none; /* Supprimer le soulignement */
-            color: white; /* Couleur du lien */
-            background-color: #28a745; /* Couleur de fond du bouton */
-            padding: 10px 20px; /* Espacement du bouton */
-            border-radius: 5px; /* Coins arrondis */
-            transition: background-color 0.3s; /* Transition de couleur */
-        }
-        a:hover {
-            background-color: #218838; /* Couleur au survol */
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f0f8ff; /* Couleur de fond douce */
+        color: #333; /* Couleur du texte principale */
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+      }
+
+      h1 {
+        color: #0056b3; /* Couleur du titre */
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 1.1em;
+        color: #555; /* Couleur secondaire */
+        line-height: 1.6;
+      }
+
+      a {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        background-color: #28a745; /* Couleur du bouton */
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+
+      a:hover {
+        background-color: #218838; /* Changement de couleur au survol */
+      }
+
+      footer {
+        margin-top: 40px;
+        font-size: 0.9em;
+        color: #888;
+      }
     </style>
-</head>
-<body>
-    <h1>Bienvenue sur la page d'accueil de l'API Flask !</h1>
-
-    <p>
-        <a href="/swagger" target="_blank">Voir la documentation Swagger</a>
-    </p>
-</body>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Bienvenue sur la page d'accueil de l'API Flask !</h1>
+      <p>
+        Explorez notre documentation Swagger pour en savoir plus sur toutes les
+        fonctionnalités de notre API.
+      </p>
+      <a href="/swagger" target="_blank">Voir la documentation Swagger</a>
+      <footer>Développé par Ibrahima Ndao</footer>
+    </div>
+  </body>
 </html>
-
