@@ -5,6 +5,7 @@
     "description": "API RESTful pour gérer les utilisateurs et les items",
     "version": "1.0.0"
   },
+  "host": "flask-project1-puce.vercel.app",
   "securityDefinitions": {
     "Bearer": {
       "type": "apiKey",
@@ -36,10 +37,17 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": { "type": "string" },
-                "password": { "type": "string" }
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
               },
-              "required": ["email", "password"]
+              "required": [
+                "email",
+                "password"
+              ]
             }
           }
         ],
@@ -49,7 +57,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "token": { "type": "string" }
+                "token": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -71,10 +81,17 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": { "type": "string" },
-                "password": { "type": "string" }
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
               },
-              "required": ["email", "password"]
+              "required": [
+                "email",
+                "password"
+              ]
             }
           }
         ],
@@ -84,7 +101,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "admin_token": { "type": "string" }
+                "admin_token": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -107,7 +126,9 @@
             "description": "Liste des utilisateurs",
             "schema": {
               "type": "array",
-              "items": { "$ref": "#/definitions/User" }
+              "items": {
+                "$ref": "#/definitions/User"
+              }
             }
           }
         }
@@ -124,7 +145,9 @@
             "name": "user",
             "in": "body",
             "description": "Les données de l'utilisateur à créer",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
@@ -150,13 +173,16 @@
             "name": "user_id",
             "in": "path",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "description": "ID de l'utilisateur"
           }
         ],
         "responses": {
           "200": {
             "description": "Utilisateur trouvé",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "404": {
             "description": "Utilisateur non trouvé"
@@ -172,10 +198,19 @@
         ],
         "parameters": [
           {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID de l'utilisateur"
+          },
+          {
             "name": "user",
             "in": "body",
             "description": "Les nouvelles données de l'utilisateur",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
@@ -202,7 +237,8 @@
             "name": "user_id",
             "in": "path",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "description": "ID de l'utilisateur"
           }
         ],
         "responses": {
@@ -228,7 +264,9 @@
             "description": "Liste des items",
             "schema": {
               "type": "array",
-              "items": { "$ref": "#/definitions/Item" }
+              "items": {
+                "$ref": "#/definitions/Item"
+              }
             }
           }
         }
@@ -245,7 +283,9 @@
             "name": "item",
             "in": "body",
             "description": "Les données de l'item à créer",
-            "schema": { "$ref": "#/definitions/Item" }
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
           }
         ],
         "responses": {
@@ -271,13 +311,16 @@
             "name": "item_id",
             "in": "path",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "description": "ID de l'item"
           }
         ],
         "responses": {
           "200": {
             "description": "Item trouvé",
-            "schema": { "$ref": "#/definitions/Item" }
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
           },
           "404": {
             "description": "Item non trouvé"
@@ -293,10 +336,19 @@
         ],
         "parameters": [
           {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID de l'item"
+          },
+          {
             "name": "item",
             "in": "body",
             "description": "Les nouvelles données de l'item",
-            "schema": { "$ref": "#/definitions/Item" }
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
           }
         ],
         "responses": {
@@ -323,7 +375,8 @@
             "name": "item_id",
             "in": "path",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "description": "ID de l'item"
           }
         ],
         "responses": {
@@ -341,20 +394,41 @@
     "User": {
       "type": "object",
       "properties": {
-        "username": { "type": "string" },
-        "email": { "type": "string" },
-        "password": { "type": "string" },
-        "role": { "type": "string" }
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
       },
-      "required": ["username", "email", "password", "role"]
+      "required": [
+        "username",
+        "email",
+        "password",
+        "role"
+      ]
     },
     "Item": {
       "type": "object",
       "properties": {
-        "id": { "type": "integer" },
-        "name": { "type": "string" },
-        "description": { "type": "string" },
-        "user_id": { "type": "integer" }
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer"
+        }
       }
     }
   }
